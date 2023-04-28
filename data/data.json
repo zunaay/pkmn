@@ -1,0 +1,141 @@
+[
+	{"id":1, "name":"Bulbasaur", "gen":1, "type":["Planta", "Veneno"], "height":0.7, "weight":6.9, "category":"Semilla", 
+	"desc-x":"Este Pokémon nace con una semilla en el lomo, que brota con el paso del tiempo.", 
+	"desc-y":"Desde que nace, crece alimentándose de los nutrientes que contiene la semilla de su lomo.", 
+	"ability":["Espesura"], "evo":[[1,2,3]], "stats":[3,3,3,4,4,3]},
+	
+	{"id":2, "name":"Ivysaur", "gen":1, "type":["Planta", "Veneno"], "height":1.0, "weight":13.0, "category":"Semilla", 
+	"desc-x":"Cuando le crece bastante el bulbo del lomo, pierde la capacidad de erguirse sobre las patas traseras.", 
+	"desc-y":"La luz del sol lo fortalece y hace que le crezca el capullo que tiene en el lomo.", 
+	"ability":["Espesura"], "evo":[[1,2,3]], "stats":[4,4,4,5,5,4]},
+	
+	{"id":3, "name":"Venusaur", "gen":1, "type":["Planta", "Veneno"], "height":2.0, "weight":100.0, "category":"Semilla", 
+	"desc-x":"La planta florece cuando absorbe energía solar, lo cual le obliga a buscar siempre la luz del sol.", 
+	"desc-y":"La flor que tiene en el lomo libera un delicado aroma, que tiene un efecto relajante en combate.", 
+	"ability":["Espesura"], "evo":[[1,2,3]], "stats":[5,5,5,6,6,5]},
+	
+	{"id":3, "name":"Mega-Venusaur", "gen":1, "type":["Planta", "Veneno"], "height":2.4, "weight":155.5, "category":"Semilla", 
+	"desc-x":"Sus patas y lomo se han fortalecido para soportar el peso de la flor, que ha crecido considerablemente tras la megaevolución.", 
+	"desc-y":"Sus patas y lomo se han fortalecido para soportar el peso de la flor, que ha crecido considerablemente tras la megaevolución.", 
+	"ability":["Sebo"], "evo":[[1,2,3]], "stats":[5,6,8,8,8,5]},
+	
+	{"id":3, "name":"Venusaur Gigamax", "gen":1, "type":["Planta", "Veneno"], "height":">24.0", "weight":"???.?", "category":"Semilla", 
+	"desc-x":"Lucha blandiendo sus dos gruesas lianas. Tiene fuerza como para derribar fácilmente un edificio de diez plantas.", 
+	"desc-y":"Esparce cantidades ingentes de polen con la fuerza de una erupción volcánica. Inhalado en exceso, puede provocar vahídos.", 
+	"ability":["Espesura"], "evo":[[1,2,3]], "stats":[5,5,5,6,6,5]},
+	
+	{"id":4, "name":"Charmander", "gen":1, "type":["Fuego"], "height":0.6, "weight":8.5, "category":"Lagartija", 
+	"desc-x":"Prefiere las cosas calientes. Dicen que cuando llueve le sale vapor de la punta de la cola.", 
+	"desc-y":"Este Pokémon nace con una llama en la punta de la cola. Si se le apagara, fallecería.", 
+	"ability":["Mar Llamas"], "evo":[[4,5,6]], "stats":[3,4,3,4,3,4]},
+	
+	{"id":5, "name":"Charmeleon", "gen":1, "type":["Fuego"], "height":1.1, "weight":19.0, "category":"Llama", 
+	"desc-x":"Este Pokémon de naturaleza agresiva ataca en combate con su cola llameante y hace trizas al rival con sus afiladas garras.", 
+	"desc-y":"Si se exalta en combate, expulsa intensas llamaradas que incineran todo a su alrededor.", 
+	"ability":["Mar Llamas"], "evo":[[4,5,6]], "stats":[4,4,4,5,4,5]},
+	
+	{"id":6, "name":"Charizard", "gen":1, "type":["Fuego", "Volador"], "height":1.7, "weight":90.5, "category":"Llama", 
+	"desc-x":"Escupe un fuego tan caliente que funde las rocas. Causa incendios forestales sin querer.", 
+	"desc-y":"Sus potentes alas le permiten volar a una altura de 1400 m. Escupe llamaradas que llegan a alcanzar temperaturas elevadísimas.", 
+	"ability":["Mar Llamas"], "evo":[[4,5,6]], "stats":[5,5,5,7,5,6]},
+	
+	{"id":6, "name":"Mega-Charizard X", "gen":1, "type":["Fuego", "Dragón"], "height":1.7, "weight":110.5, "category":"Llama", 
+	"desc-x":"La extraordinaria energía que fluye por su cuerpo le ha ennegrecido la piel y provocado la aparición de intensas llamas azules.", 
+	"desc-y":"La extraordinaria energía que fluye por su cuerpo le ha ennegrecido la piel y provocado la aparición de intensas llamas azules.", 
+	"ability":["Garra Dura"], "evo":[[4,5,6]], "stats":[5,8,7,8,5,6]},
+	
+	{"id":6, "name":"Mega-Charizard Y", "gen":1, "type":["Fuego", "Volador"], "height":1.7, "weight":100.5, "category":"Llama", 
+	"desc-x":"El vínculo que lo une a su Entrenador es la fuente de su poder. Su capacidad de vuelo supera la de un avión a reacción.", 
+	"desc-y":"El vínculo que lo une a su Entrenador es la fuente de su poder. Su capacidad de vuelo supera la de un avión a reacción.", 
+	"ability":["Sequía"], "evo":[[4,5,6]], "stats":[5,7,5,10,7,6]},
+	
+	{"id":6, "name":"Charizard Gigamax", "gen":1, "type":["Fuego", "Volador"], "height":">28.0", "weight":"???.?", "category":"Llama", 
+	"desc-x":"La energía del fenómeno Gigamax ha dotado a este Charizard de alas flamígeras y un enorme tamaño.", 
+	"desc-y":"Las llamas del interior de su cuerpo forman un torbellino que alcanza los 2000 °C. Al rugir aumenta todavía más su energía térmica.", 
+	"ability":["Mar Llamas"], "evo":[[4,5,6]], "stats":[5,5,5,5,6,7]},
+	
+	{"id":7, "name":"Squirtle", "gen":1, "type":["Agua"], "height":0.5, "weight":9.0, "category":"Tortuguita", 
+	"desc-x":"Cuando retrae su largo cuello en el caparazón, dispara agua a una presión increíble.", 
+	"desc-y":"Cuando se siente en peligro, se esconde en su caparazón y escupe chorros de agua por la boca.", 
+	"ability":["Torrente"], "evo":[[7,8,9]], "stats":[3,3,4,3,4,3]},
+	
+	{"id":8, "name":"Wartortle", "gen":1, "type":["Agua"], "height":1.0, "weight":22.5, "category":"Tortuga", 
+	"desc-x":"Se lo considera un símbolo de longevidad. Los ejemplares más ancianos tienen musgo sobre el caparazón.", 
+	"desc-y":"Utiliza hábilmente sus peludas orejas y la cola para mantener el equilibrio al nadar.", 
+	"ability":["Torrente"], "evo":[[7,8,9]], "stats":[4,4,5,4,5,4]},
+	
+	{"id":9, "name":"Blastoise", "gen":1, "type":["Agua"], "height":1.6, "weight":85.5, "category":"Armazón", 
+	"desc-x":"Para acabar con su enemigo, lo aplasta con el peso de su cuerpo. En momentos de apuro, se esconde en el caparazón.", 
+	"desc-y":"Dispara chorros de agua a través de los cañones de su caparazón, capaces de agujerear incluso el acero.", 
+	"ability":["Torrente"], "evo":[[7,8,9]], "stats":[5,5,6,5,7,5]},
+	
+	{"id":9, "name":"Mega-Blastoise", "gen":1, "type":["Agua"], "height":1.6, "weight":101.1, "category":"Armazón", 
+	"desc-x":"Sus fornidas patas y lomo le permiten aguantar el retroceso del cañón de su caparazón, cuya potencia de disparo es pareja a la de un tanque.", 
+	"desc-y":"Sus fornidas patas y lomo le permiten aguantar el retroceso del cañón de su caparazón, cuya potencia de disparo es pareja a la de un tanque.", 
+	"ability":["Megadisparador"], "evo":[[7,8,9]], "stats":[5,7,8,8,7,5]},
+	
+	{"id":9, "name":"Blastoise Gigamax", "gen":1, "type":["Agua"], "height":">25.0", "weight":"???,?", "category":"Armazón", 
+	"desc-x":"No es muy hábil con tiros de precisión. Su estilo consiste más bien en disparar sus 31 cañones de forma indiscriminada.", 
+	"desc-y":"Los chorros de agua que dispara por el cañón central tienen la fuerza suficiente como para abrir un boquete en una montaña.", 
+	"ability":["Torrente"], "evo":[[7,8,9]], "stats":[5,5,6,5,7,5]},
+	
+	{"id":10, "name":"Caterpie", "gen":1, "type":["Bicho"], "height":0.3, "weight":2.9, "category":"Gusano", 
+	"desc-x":"Para protegerse, despide un hedor horrible por las antenas con el que repele a sus enemigos.", 
+	"desc-y":"Sus cortas patas están recubiertas de ventosas que le permiten subir incansable por muros y cuestas.", 
+	"ability":["Polvo Escudo"], "evo":[[10,11,12]], "stats":[3,2,3,2,2,3]},
+	
+	{"id":0, "name":"", "gen":1, "type":[], "height":0, "weight":0, "category":"", 
+	"desc-x":"", 
+	"desc-y":"", 
+	"ability":[], "evo":[[]], "stats":[]},
+	
+	{"id":0, "name":"", "gen":1, "type":[], "height":0, "weight":0, "category":"", 
+	"desc-x":"", 
+	"desc-y":"", 
+	"ability":[], "evo":[[]], "stats":[]},
+	
+	{"id":0, "name":"", "gen":1, "type":[], "height":0, "weight":0, "category":"", 
+	"desc-x":"", 
+	"desc-y":"", 
+	"ability":[], "evo":[[]], "stats":[]},
+	
+	{"id":0, "name":"", "gen":1, "type":[], "height":0, "weight":0, "category":"", 
+	"desc-x":"", 
+	"desc-y":"", 
+	"ability":[], "evo":[[]], "stats":[]},
+	
+	{"id":0, "name":"", "gen":1, "type":[], "height":0, "weight":0, "category":"", 
+	"desc-x":"", 
+	"desc-y":"", 
+	"ability":[], "evo":[[]], "stats":[]},
+	
+	{"id":0, "name":"", "gen":1, "type":[], "height":0, "weight":0, "category":"", 
+	"desc-x":"", 
+	"desc-y":"", 
+	"ability":[], "evo":[[]], "stats":[]},
+	
+	{"id":0, "name":"", "gen":1, "type":[], "height":0, "weight":0, "category":"", 
+	"desc-x":"", 
+	"desc-y":"", 
+	"ability":[], "evo":[[]], "stats":[]},
+	
+	{"id":0, "name":"", "gen":1, "type":[], "height":0, "weight":0, "category":"", 
+	"desc-x":"", 
+	"desc-y":"", 
+	"ability":[], "evo":[[]], "stats":[]},
+	
+	{"id":0, "name":"", "gen":1, "type":[], "height":0, "weight":0, "category":"", 
+	"desc-x":"", 
+	"desc-y":"", 
+	"ability":[], "evo":[[]], "stats":[]},
+	
+	{"id":0, "name":"", "gen":1, "type":[], "height":0, "weight":0, "category":"", 
+	"desc-x":"", 
+	"desc-y":"", 
+	"ability":[], "evo":[[]], "stats":[]},
+	
+	{"id":0, "name":"", "gen":1, "type":[], "height":0, "weight":0, "category":"", 
+	"desc-x":"", 
+	"desc-y":"", 
+	"ability":[], "evo":[[]], "stats":[]}
+]

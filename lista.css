@@ -1,0 +1,239 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: verdana, tahoma, sans-serif;
+    color: #000;
+    font-size: 15px;
+}
+
+form {
+    z-index: 10;
+    padding: 20px;
+    background-color: #fff;
+    width: 100%;
+    position: relative;
+}
+
+#container-wrapper {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+}
+
+#pkmn-list-container {
+    padding: 0;
+    display: inline-block;
+    list-style: none;
+    position: relative;
+    width: calc(222px * 10);
+    margin: auto;
+}
+
+.pkmn-card {
+    text-align: left;
+    border: 1px solid #ddd;
+    float: left;
+    margin: 5px;
+    display: grid;
+    padding: 15px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.pkmn-card:hover {
+    box-shadow: 0px 0px 10px #ccc;
+}
+
+img {
+    border: 1px solid #ddd;
+    background-color: #f0f0f0;
+    width: 180px;
+    height: 180px;
+
+    background: url(https://corporate.pokemon.com/hero-pokeball-3430739968171e9fe85357e4739be704.png) center center no-repeat #f0f0f0;
+    background-size: 70%;
+}
+
+.pkmn-number {
+    font-family: consolas, monospace;
+    font-size: 12px;
+    color: #737373;
+    margin-top: 10px;
+}
+
+.pkmn-gen1 {
+    background: url(https://images.wikidexcdn.net/mwuploads/wikidex/2/2a/latest/20220602220839/Primera_generaci%C3%B3n.png) no-repeat top right;
+}
+
+.pkmn-gen2 {
+    background: url(https://images.wikidexcdn.net/mwuploads/wikidex/f/f7/latest/20220602220844/Segunda_generaci%C3%B3n.png) no-repeat top right;
+}
+
+.pkmn-gen3 {
+    background: url(https://images.wikidexcdn.net/mwuploads/wikidex/5/54/latest/20220602220849/Tercera_generaci%C3%B3n.png) no-repeat top right;
+}
+
+.pkmn-gen4 {
+    background: url(https://images.wikidexcdn.net/mwuploads/wikidex/0/0a/latest/20220602220854/Cuarta_generaci%C3%B3n.png) no-repeat top right;
+}
+
+.pkmn-gen5 {
+    background: url(https://images.wikidexcdn.net/mwuploads/wikidex/6/61/latest/20220602220857/Quinta_generaci%C3%B3n.png) no-repeat top right;
+}
+
+.pkmn-gen6 {
+    background: url(https://images.wikidexcdn.net/mwuploads/wikidex/1/1a/latest/20220602220016/Sexta_generaci%C3%B3n.png) no-repeat top right;
+}
+
+.pkmn-gen7 {
+    background: url(https://images.wikidexcdn.net/mwuploads/wikidex/0/0a/latest/20220602215812/S%C3%A9ptima_generaci%C3%B3n.png) no-repeat top right;
+}
+
+.pkmn-gen8 {
+    background: url(https://images.wikidexcdn.net/mwuploads/wikidex/b/b4/latest/20220602215725/Octava_generaci%C3%B3n.png) no-repeat top right;
+}
+
+.pkmn-gen9 {
+    background: url(https://images.wikidexcdn.net/mwuploads/wikidex/b/bc/latest/20220602215652/Novena_generaci%C3%B3n.png) no-repeat top right;
+}
+
+.pkmn-name {
+    font-size: 20px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 180px;
+}
+
+.pkmn-type .pill {
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 12px;
+    border-radius: 10px;
+    width: 70px;
+    display: inline-block;
+    text-align: center;
+    font-family: consolas, monospace;
+    font-weight: 700;
+}
+
+.pill + .pill {
+    margin-left: 5px;
+}
+
+.background-color-bug {background-color: #92a312;}
+.background-color-dark {background-color: #4f3f3d;}
+.background-color-dragon {background-color: #4f60e2;}
+.background-color-electric {background-color: #fac100;}
+.background-color-fairy {background-color: #ef71ef;}
+.background-color-fighting {background-color: #ff8100;}
+.background-color-fire {background-color: #e72324;}
+.background-color-flying {background-color: #82baef;}
+.background-color-ghost {background-color: #713f71;}
+.background-color-grass {background-color: #3da324;}
+.background-color-ground {background-color: #92501b;}
+.background-color-ice {background-color: #3dd9ff;}
+.background-color-normal {background-color: #a0a3a0;}
+.background-color-poison {background-color: #923fcc;}
+.background-color-psychic {background-color: #ef3f7a;}
+.background-color-rock {background-color: #b1ab82;}
+.background-color-steel {background-color: #60a3b9;}
+.background-color-water {background-color: #2481ef;}
+
+.background-color-bug::after {content: 'Bicho';}
+.background-color-dark::after {content: 'Siniestro';}
+.background-color-dragon::after {content: 'Dragón';}
+.background-color-electric::after {content: 'Eléctrico';}
+.background-color-fairy::after {content: 'Hada';}
+.background-color-fighting::after {content: 'Lucha';}
+.background-color-fire::after {content: 'Fuego';}
+.background-color-flying::after {content: 'Volador';}
+.background-color-ghost::after {content: 'Fantasma';}
+.background-color-grass::after {content: 'Planta';}
+.background-color-ground::after {content: 'Tierra';}
+.background-color-ice::after {content: 'Hielo';}
+.background-color-normal::after {content: 'Normal';}
+.background-color-poison::after {content: 'Veneno';}
+.background-color-psychic::after {content: 'Psíquico';}
+.background-color-rock::after {content: 'Roca';}
+.background-color-steel::after {content: 'Acero';}
+.background-color-water::after {content: 'Agua';}
+
+
+#button-up {
+    z-index: 100;
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    color: #000;
+    font-size: 50px;
+    opacity: .2;
+    cursor: pointer;
+    transition: 200ms;
+}
+
+#button-up:hover {
+    opacity: .3;
+}
+
+
+/* animacion */
+@keyframes carga {
+    0% {transform: rotate(0deg);}
+    100% {transform: rotate(360deg);}
+}
+
+.fa-solid.fa-spinner {
+    font-size: 50px;
+    animation-name: carga;
+    animation-duration: 1000ms;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+
+/* Mobile */
+
+@media only screen and (max-width: 2222px) {
+    #pkmn-list-container { width: calc(222px * 9); }
+}
+
+@media only screen and (max-width: 2000px) {
+    #pkmn-list-container { width: calc(222px * 8); }
+}
+
+@media only screen and (max-width: 1778px) {
+    #pkmn-list-container { width: calc(222px * 7); }
+}
+
+@media only screen and (max-width: 1556px) {
+    #pkmn-list-container { width: calc(222px * 6); }
+}
+
+@media only screen and (max-width: 1334px) {
+    #pkmn-list-container { width: calc(222px * 5); }
+}
+
+@media only screen and (max-width: 1112px) {
+    #pkmn-list-container { width: calc(222px * 4); }
+}
+
+@media only screen and (max-width: 890px) {
+    #pkmn-list-container { width: calc(222px * 3); }
+}
+
+@media only screen and (max-width: 668px) {
+    #pkmn-list-container { width: calc(222px * 2); }
+}
+
+@media only screen and (max-width: 446px) {
+    #pkmn-list-container { width: calc(222px * 1); }
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>[BETA] Pokédex</title>
+	<link rel="stylesheet" type="text/css" href="lista.css">
+	<script src="https://kit.fontawesome.com/24760464c6.js" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script type="text/javascript" src="dex.js"></script>
+	<link rel="shortcut icon" href="icon.jpg" type="image/x-icon">
+</head>
+<body>
+	<form onsubmit="return false;" >
+		<select id="filter-gen"></select>
+		<select id="filter-type1">
+			<option value="all">Todos los tipos</option>
+			<option value="steel">Acero</option>
+			<option value="water">Agua</option>
+			<option value="bug">Bicho</option>
+			<option value="dragon">Dragón</option>
+			<option value="electric">Eléctrico</option>
+			<option value="ghost">Fantasma</option>
+			<option value="fire">Fuego</option>
+			<option value="fairy">Hada</option>
+			<option value="ice">Hielo</option>
+			<option value="fighting">Lucha</option>
+			<option value="normal">Normal</option>
+			<option value="grass">Planta</option>
+			<option value="psychic">Psíquico</option>
+			<option value="rock">Roca</option>
+			<option value="dark">Siniestro</option>
+			<option value="ground">Tierra</option>
+			<option value="poison">Veneno</option>
+			<option value="flying">Volador</option>
+		</select>
+		<select id="filter-order">
+			<option value="oldest">Más antiguos</option>
+			<option value="newest">Más recientes</option>
+			<option value="az">A-Z</option>
+			<option value="za">Z-A</option>
+		</select>
+		<select id="filter-special">
+			<option value="all">No filtrar especiales</option>
+			<option value="starter">Iniciales</option>
+			<option value="legendary">Legendarios</option>
+			<option value="megaevo">Megaevoluciones</option>
+			<option value="regional">Regionales</option>
+			<option value="ultrabeast">Ultraentes</option>
+		</select>
+		<input id="filter-name" value="" >
+
+	</form>
+	<div id="container-wrapper">
+		<ul id="pkmn-list-container">
+			<i class="fa-solid fa-spinner"></i>
+		</ul>
+	</div>
+	<span id="button-up">
+		<i class="fa-solid fa-circle-chevron-up"></i>
+	</span>
+</body>
+</html>
+
+<!--
+https://stackoverflow.com/questions/244183/how-to-display-a-loading-screen-while-site-content-loads
+-->
