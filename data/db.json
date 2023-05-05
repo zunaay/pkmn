@@ -137,7 +137,6 @@
 	{"id":"0101", "gen":8, "variant":2, "name":"Electrode de Hisui", "type":["electric", "grass"], "special":"regional"},
 	{"id":"0102", "gen":1, "variant":1, "name":"Exeggcute", "type":["grass", "psychic"]},
 	{"id":"0103", "gen":1, "variant":1, "name":"Exeggutor", "type":["grass", "psychic"]},
-	{"id":"0103", "gen":1, "variant":1, "name":"Exeggutor", "type":["grass", "psychic"]},
 	{"id":"0103", "gen":7, "variant":2, "name":"Exeggutor de Alola", "type":["grass", "dragon"], "special":"regional"},
 	{"id":"0104", "gen":1, "variant":1, "name":"Cubone", "type":["ground"]},
 	{"id":"0105", "gen":1, "variant":1, "name":"Marowak", "type":["ground"]},

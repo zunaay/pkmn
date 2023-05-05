@@ -32,6 +32,26 @@ function fillSelect() {
 
 }
 
+function preloadDex(db, parent = "#pkmn-list-container") {
+	return new Promise(resolve => {
+
+		// Dibujar
+		for (p = 0; p < db.length; p++) {
+			$(parent).append('<li class="pkmn-card" data-pkmnid="' + db[p].id + '"></li>');
+			$(parent).find(".pkmn-card").eq(p).append('<img src="' + getIMG(db[p].id, "small", db[p].variant) + '" alt="' + db[p].name + '">');
+			$(parent).find(".pkmn-card").eq(p).append('<span class="pkmn-number pkmn-gen' + db[p].gen + ' ">#' + db[p].id + '</span>');
+			$(parent).find(".pkmn-card").eq(p).append('<span class="pkmn-name" title="' + db[p].name + '">' + db[p].name + '</span>');
+			$(parent).find(".pkmn-card").eq(p).append('<div class="pkmn-type"></div>');
+			for (t = 0; t < db[p].type.length; t++) {
+				$(parent).find(".pkmn-card .pkmn-type").eq(p).append('<span class="pill background-color-' + db[p].type[t] + '"></span>');
+			};
+
+		};
+
+
+	});
+}
+
 
 function cargarDex() {
 	const [gen, buscador, tipo, orden, especial] = getFiltros();
@@ -66,6 +86,12 @@ function cargarDex() {
 		var nombre = normalize(buscador).toLowerCase();
 		tempDex = tempDex.filter(v => {return (normalize(v.name).toLowerCase()).includes(nombre)});
 	};
+
+	// Ocultar variantes
+	if (especial != "megaevo" && especial != "regional") {
+		tempDex = tempDex.filter(v => {return v.variant == 1});
+	}
+	
 
 
 	// Ordenar
@@ -111,24 +137,39 @@ function cargarDex() {
 			break;
 	};
 
-
-
-
 	$("#pkmn-list-container").html("");
+	preloadDex(tempDex);
+};
 
-	// Dibujar
-	for (p = 0; p < tempDex.length; p++) {
-		$("#pkmn-list-container").append('<li class="pkmn-card"></li>');
-		$(".pkmn-card").eq(p).append('<img src="' + getIMG(tempDex[p].id, "small", tempDex[p].variant) + '" alt="' + tempDex[p].name + '">');
-		$(".pkmn-card").eq(p).append('<span class="pkmn-number pkmn-gen' + tempDex[p].gen + ' ">#' + tempDex[p].id + '</span>');
-		$(".pkmn-card").eq(p).append('<span class="pkmn-name" title="' + tempDex[p].name + '">' + tempDex[p].name + '</span>');
-		$(".pkmn-card").eq(p).append('<div class="pkmn-type"></div>');
-		for (t = 0; t < tempDex[p].type.length; t++) {
-			$(".pkmn-card .pkmn-type").eq(p).append('<span class="pill background-color-' + tempDex[p].type[t] + '"></span>');
+function cargarVariant(id) {
+	// Cargar solo las variantes
+	var variant = dex.filter(v => {return v.id == id});
+	$("#popup-card-container").html('');
+	$("#popup-navigation-container").html('');
+
+	// Si hay más de uno dibujar botones
+	if (variant.length > 1) {
+		for (i = 0; i < variant.length; i++) {
+			$("#popup-navigation-container").append('<div class="pkmn-variant" data-variant="' + variant[i].variant + '">' + variant[i].variant + '</div>');
 		};
 
+		$(".pkmn-variant").eq(0).addClass("active");
 	};
+
+	preloadDex(variant, "#popup-card-container");
+
+	$("#popup-card-container .pkmn-card").eq(0).addClass("active");
 };
+
+function changeMobileCard(n) {
+	// clean actives
+	$("#popup-navigation-container .pkmn-variant.active").removeClass("active");
+	$("#popup-card-container .pkmn-card.active").removeClass("active");
+
+	// set new actives
+	$("#popup-navigation-container .pkmn-variant").eq(n).addClass("active");
+	$("#popup-card-container .pkmn-card").eq(n).addClass("active");
+}
 
 
 $(function() {
@@ -146,6 +187,26 @@ $(function() {
 		$("#pkmn-list-container").html("");
 		$("#pkmn-list-container").append('<i class="fa-solid fa-spinner"></i>');
 		cargarDex();
+	});
+
+	$("#pkmn-list-container").on("click", ".pkmn-card", function(){
+		var num = $(this).attr("data-pkmnid");
+		cargarVariant(num);
+		$("#popup-bg").fadeIn(100);
+	});
+
+	$("#popup-bg").click(function() {
+		$(this).fadeOut(100);
+	});
+
+	$("#popup-card-container").on("click", ".pkmn-card", function(event) {
+		event.stopPropagation();
+	});
+
+	$("#popup-navigation-container").on("click", ".pkmn-variant", function(event) {
+		event.stopPropagation();
+		var num = parseInt( $(this).attr("data-variant") ) - 1;
+		changeMobileCard(num);
 	});
 
 	

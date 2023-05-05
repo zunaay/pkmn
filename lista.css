@@ -199,6 +199,56 @@ img {
     animation-iteration-count: infinite;
 }
 
+#popup-bg {
+    position: fixed;
+    background-color: #000c;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 11;
+    display: none;
+}
+
+#popup-container {
+    position: relative;
+    height: 100%;
+    margin: auto;
+    display: grid;
+    align-content: center;
+}
+
+#popup-card-container, #popup-navigation-container {
+    padding: 10px;
+    text-align: center;
+}
+
+#popup-navigation-container {
+    display: none;
+}
+
+#popup-card-container .pkmn-card {
+    position: relative;
+    display: inline-grid;
+    float: none;
+    margin:15px;
+}
+
+.pkmn-variant {
+    display: inline-block;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 50%;
+    margin: 0px 10px 10px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.pkmn-variant.active, .pkmn-variant:hover {
+    background-color: #ddd;
+    box-shadow: 0px 0px 5px #ccc;
+}
 
 /* Mobile */
 
@@ -226,6 +276,17 @@ img {
     #pkmn-list-container { width: calc(222px * 4); }
 }
 
+@media only screen and (max-width: 1000px) {
+    /* Popup */
+    #popup-card-container .pkmn-card:not(.active) {
+        display: none;
+    }
+
+    #popup-navigation-container {
+        display: block;
+    }
+}
+
 @media only screen and (max-width: 890px) {
     #pkmn-list-container { width: calc(222px * 3); }
 }
@@ -235,5 +296,35 @@ img {
 }
 
 @media only screen and (max-width: 446px) {
-    #pkmn-list-container { width: calc(222px * 1); }
+    #pkmn-list-container { 
+        width: 100%;
+    }
+
+    #pkmn-list-container .pkmn-card {
+        width: calc(50% - 10px);
+    }
+
+    #pkmn-list-container .pkmn-card img { 
+        width: calc(100%);
+        height: calc(100%);
+    }
+
+    #popup-card-container .pkmn-card {
+        width: 80%;
+    }
+
+    #popup-card-container .pkmn-card img {
+        width: calc(100%);
+        height: calc(100%);
+    }
+}
+
+@media only screen and (max-width: 373px) {
+    #pkmn-list-container {
+        width: 90%;
+    }
+
+    #pkmn-list-container .pkmn-card {
+        width: calc(100% - 10px);
+    }
 }
