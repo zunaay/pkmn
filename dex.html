@@ -11,46 +11,53 @@
 	<link rel="shortcut icon" href="icon.jpg" type="image/x-icon">
 </head>
 <body>
-	<form onsubmit="return false;" >
-		<select id="filter-gen"></select>
-		<select id="filter-type1">
-			<option value="all">Todos los tipos</option>
-			<option value="steel">Acero</option>
-			<option value="water">Agua</option>
-			<option value="bug">Bicho</option>
-			<option value="dragon">Dragón</option>
-			<option value="electric">Eléctrico</option>
-			<option value="ghost">Fantasma</option>
-			<option value="fire">Fuego</option>
-			<option value="fairy">Hada</option>
-			<option value="ice">Hielo</option>
-			<option value="fighting">Lucha</option>
-			<option value="normal">Normal</option>
-			<option value="grass">Planta</option>
-			<option value="psychic">Psíquico</option>
-			<option value="rock">Roca</option>
-			<option value="dark">Siniestro</option>
-			<option value="ground">Tierra</option>
-			<option value="poison">Veneno</option>
-			<option value="flying">Volador</option>
-		</select>
-		<select id="filter-order">
-			<option value="oldest">Más antiguos</option>
-			<option value="newest">Más recientes</option>
-			<option value="az">A-Z</option>
-			<option value="za">Z-A</option>
-		</select>
-		<select id="filter-special">
-			<option value="all">No filtrar especiales</option>
-			<option value="starter">Iniciales</option>
-			<option value="legendary">Legendarios</option>
-			<option value="megaevo">Megaevoluciones</option>
-			<option value="regional">Regionales</option>
-			<option value="ultrabeast">Ultraentes</option>
-		</select>
-		<input id="filter-name" value="" >
+	<div id="form-container">
+		<div id="show-filters" class="mobile-option"><i class="fas fa-bars"></i> Menú</div>
 
-	</form>
+		<form onsubmit="return false;" >
+			<div id="hide-filters" class="mobile-option"><i class="fas fa-times-circle"></i></div>
+			<select id="filter-gen"></select>
+			<select id="filter-type1">
+				<option value="all">Todos los tipos</option>
+				<option value="steel">Acero</option>
+				<option value="water">Agua</option>
+				<option value="bug">Bicho</option>
+				<option value="dragon">Dragón</option>
+				<option value="electric">Eléctrico</option>
+				<option value="ghost">Fantasma</option>
+				<option value="fire">Fuego</option>
+				<option value="fairy">Hada</option>
+				<option value="ice">Hielo</option>
+				<option value="fighting">Lucha</option>
+				<option value="normal">Normal</option>
+				<option value="grass">Planta</option>
+				<option value="psychic">Psíquico</option>
+				<option value="rock">Roca</option>
+				<option value="dark">Siniestro</option>
+				<option value="ground">Tierra</option>
+				<option value="poison">Veneno</option>
+				<option value="flying">Volador</option>
+			</select>
+			<select id="filter-order">
+				<option value="oldest">Más antiguos</option>
+				<option value="newest">Más recientes</option>
+				<option value="az">A-Z</option>
+				<option value="za">Z-A</option>
+			</select>
+			<select id="filter-special">
+				<option value="all">No filtrar especiales</option>
+				<option value="starter">Iniciales</option>
+				<option value="legendary">Legendarios</option>
+				<option value="megaevo">Megaevoluciones</option>
+				<option value="regional">Regionales</option>
+				<option value="ultrabeast">Ultraentes</option>
+			</select>
+			<input id="filter-name" value="" placeholder="Buscar...">
+		</form>		
+	</div>
+	
+	<div id="loading"><i class="fas fa-spinner fa-pulse"></i></div>
+
 	<div id="container-wrapper">
 		<ul id="pkmn-list-container">
 			<i class="fa-solid fa-spinner"></i>
@@ -68,7 +75,3 @@
 	</div>
 </body>
 </html>
-
-<!--
-https://stackoverflow.com/questions/244183/how-to-display-a-loading-screen-while-site-content-loads
--->

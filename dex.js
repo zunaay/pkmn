@@ -1,4 +1,5 @@
 var dex = [];
+var timer = "";
 
 $(document).ready(function() {
 	const dx =  new XMLHttpRequest(); dx.open("GET", "data/db.json");dx.responseType = "json"; dx.send();
@@ -17,6 +18,8 @@ function fillSelect() {
 	var cuenta = "";
 	var gen = 1;
 
+	$("#filter-gen").append('<option value="all">Todas las generaciones</option>');	
+
 	do {
 		cuenta = dex.filter(v => {return v.gen == gen});
 		if (cuenta.length > 0) {
@@ -25,7 +28,6 @@ function fillSelect() {
 		gen++;
 
 	} while (cuenta.length > 0);
-	$("#filter-gen").append('<option value="all">Todas las generaciones</option>');
 
 	// Especial
 	// starters - legendarios - singulares - ultraentes
@@ -33,27 +35,39 @@ function fillSelect() {
 }
 
 function preloadDex(db, parent = "#pkmn-list-container") {
-	return new Promise(resolve => {
 
-		// Dibujar
-		for (p = 0; p < db.length; p++) {
-			$(parent).append('<li class="pkmn-card" data-pkmnid="' + db[p].id + '"></li>');
-			$(parent).find(".pkmn-card").eq(p).append('<img src="' + getIMG(db[p].id, "small", db[p].variant) + '" alt="' + db[p].name + '">');
-			$(parent).find(".pkmn-card").eq(p).append('<span class="pkmn-number pkmn-gen' + db[p].gen + ' ">#' + db[p].id + '</span>');
-			$(parent).find(".pkmn-card").eq(p).append('<span class="pkmn-name" title="' + db[p].name + '">' + db[p].name + '</span>');
-			$(parent).find(".pkmn-card").eq(p).append('<div class="pkmn-type"></div>');
-			for (t = 0; t < db[p].type.length; t++) {
-				$(parent).find(".pkmn-card .pkmn-type").eq(p).append('<span class="pill background-color-' + db[p].type[t] + '"></span>');
+	// separar la db en chunks para no bloquear la pagina
+    var chunk = 100;
+    var index = 0;
+
+    function doChunk() {
+        var cnt = chunk;
+        while (cnt-- && index < db.length) {
+            // process array[index] here
+			$(parent).append('<li class="pkmn-card" data-pkmnid="' + db[index].id + '"></li>');
+			$(parent).find(".pkmn-card").eq(index).append('<img src="' + getIMG(db[index].id, "small", db[index].variant) + '" alt="' + db[index].name + '">');
+			$(parent).find(".pkmn-card").eq(index).append('<span class="pkmn-number pkmn-gen' + db[index].gen + ' ">#' + db[index].id + '</span>');
+			$(parent).find(".pkmn-card").eq(index).append('<span class="pkmn-name" title="' + db[index].name + '">' + db[index].name + '</span>');
+			$(parent).find(".pkmn-card").eq(index).append('<div class="pkmn-type"></div>');
+			for (t = 0; t < db[index].type.length; t++) {
+				$(parent).find(".pkmn-card .pkmn-type").eq(index).append('<span class="pill background-color-' + db[index].type[t] + '"></span>');
 			};
 
-		};
+            ++index;
+        }
+        if (index < db.length) {
+            // set Timeout for async iteration
+            timer = setTimeout(doChunk, 5);
+        }
+    }
 
-
-	});
+	doChunk();
 }
 
 
 function cargarDex() {
+	clearTimeout(timer);
+
 	const [gen, buscador, tipo, orden, especial] = getFiltros();
 
 	var tempDex = [];
@@ -178,14 +192,10 @@ $(function() {
 	});
 
 	$("select").change(function() {
-		$("#pkmn-list-container").html("");
-		$("#pkmn-list-container").append('<i class="fa-solid fa-spinner"></i>');
 		cargarDex();
 	});
 
 	$("input").on("input", function() {
-		$("#pkmn-list-container").html("");
-		$("#pkmn-list-container").append('<i class="fa-solid fa-spinner"></i>');
 		cargarDex();
 	});
 
@@ -209,6 +219,17 @@ $(function() {
 		changeMobileCard(num);
 	});
 
+
+	// MOBILE SETTINGS
+	$("#show-filters").click(function() {
+		$("form").show();
+		$("body").css("overflow", "hidden");
+	});
+
+	$("#hide-filters").click(function() {
+		$("form").hide();
+		$("body").css("overflow", "auto");
+	})
 	
 });
 
