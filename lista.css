@@ -8,6 +8,11 @@ html, body {
     scroll-behavior: smooth;
 }
 
+::selection, ::-moz-selection {
+    background-color: #aaa;
+    color: #fff;
+}
+
 body {
     font-family: verdana, tahoma, sans-serif;
     color: #000;
@@ -43,7 +48,7 @@ form {
     padding: 20px;
 }
 
-select, input {
+select, input, optgroup {
     background-color: #fff;
     border: 1px solid #bbb;
     padding: 10px;
@@ -51,6 +56,11 @@ select, input {
     margin: 2px;
     font-family: consolas, monospace;
     font-size: 12px;
+}
+
+option:disabled {
+    color: #000;
+    font-weight: 700;
 }
 
 #loading {

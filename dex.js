@@ -1,14 +1,12 @@
-var dex = [];
+var pokedex = [];
 var timer = "";
 
 $(document).ready(function() {
-	const dx =  new XMLHttpRequest(); dx.open("GET", "data/db.json");dx.responseType = "json"; dx.send();
-    dx.onload = function() { 
-    	dex = dx.response;
-
-    	fillSelect();
+	$.get("data/national.json", pkdx => {
+		pokedex = pkdx;
+		fillSelect();
     	cargarDex();
-	};
+	});
 });
 
 // rellenar selects
@@ -18,23 +16,24 @@ function fillSelect() {
 	var cuenta = "";
 	var gen = 1;
 
-	$("#filter-gen").append('<option value="all">Todas las generaciones</option>');	
+	//$("#filter-gen").append('<option value="all">Todas las generaciones</option>');	
 
 	do {
-		cuenta = dex.filter(v => {return v.gen == gen});
+		cuenta = pokedex.filter(v => {return v.gen == gen});
 		if (cuenta.length > 0) {
 			$("#filter-gen").append('<option value="' + gen + '">GEN ' + gen + ' (' + cuenta.length + ')</option>');
 		};
 		gen++;
 
 	} while (cuenta.length > 0);
+	$("#filter-gen").val(gen - 2); // Cargar solo última gen
 
 	// Especial
 	// starters - legendarios - singulares - ultraentes
 
 }
 
-function preloadDex(db, parent = "#pkmn-list-container") {
+function preloadDex(db, parent = "#pkmn-list-container", size = "small") {
 
 	// separar la db en chunks para no bloquear la pagina
     var chunk = 100;
@@ -43,10 +42,23 @@ function preloadDex(db, parent = "#pkmn-list-container") {
     function doChunk() {
         var cnt = chunk;
         while (cnt-- && index < db.length) {
+
+			// La numeración cambia segun la pokedex
+			var gen = $("#filter-gen").val();
+			var num = db[index].id;
+
+			if (gen.includes("r-")) {
+				var region = gen.replace("r-","");
+				num = String(db[index][region]);
+				if (num > 9 && num < 100) num = "0" + num;
+				if (num < 10) num = "00" + num;
+			};
+			
             // process array[index] here
 			$(parent).append('<li class="pkmn-card" data-pkmnid="' + db[index].id + '"></li>');
-			$(parent).find(".pkmn-card").eq(index).append('<img src="' + getIMG(db[index].id, "small", db[index].variant) + '" alt="' + db[index].name + '">');
-			$(parent).find(".pkmn-card").eq(index).append('<span class="pkmn-number pkmn-gen' + db[index].gen + ' ">#' + db[index].id + '</span>');
+
+			$(parent).find(".pkmn-card").eq(index).append('<img src="' + getIMG(db[index].id, size, db[index].variant) + '" alt="' + db[index].name + '">');
+			$(parent).find(".pkmn-card").eq(index).append('<span class="pkmn-number pkmn-gen' + db[index].gen + ' ">#' + num + '</span>');
 			$(parent).find(".pkmn-card").eq(index).append('<span class="pkmn-name" title="' + db[index].name + '">' + db[index].name + '</span>');
 			$(parent).find(".pkmn-card").eq(index).append('<div class="pkmn-type"></div>');
 			for (t = 0; t < db[index].type.length; t++) {
@@ -66,33 +78,52 @@ function preloadDex(db, parent = "#pkmn-list-container") {
 
 
 function cargarDex() {
+
+	/*
+		PROBLEMAS
+		-- dex regional: paldea - tauros de paldea
+	*/
+
 	clearTimeout(timer);
 
 	const [gen, buscador, tipo, orden, especial] = getFiltros();
 
 	var tempDex = [];
-	for (x = 0; x < dex.length; x++) {tempDex.push(dex[x])};
+	for (x = 0; x < pokedex.length; x++) {tempDex.push(pokedex[x])};
 
 
 	// Filtrar por tipos
 	if (tipo != "all") {
 		tempDex = tempDex.filter(v => {return v.type[0] == tipo});
 
-		var temp = dex.filter(v => {return v.type[1] == tipo});
+		var temp = pokedex.filter(v => {return v.type[1] == tipo});
 		tempDex = tempDex.concat(temp);
 
 	};
 
 
 	// Filtrar por generacion
-	if (gen != "all") {
-		tempDex = tempDex.filter(v => {return v.gen == parseInt(gen)});
+	if (gen != "national") {
+		if (gen.includes("r-")) {
+			//Filtrar por región
+			var region = gen.replace("r-","");
+			tempDex = tempDex.filter(v => {return v[region] != null});
+
+		} else {
+			//Filtrar por generacion
+			tempDex = tempDex.filter(v => {return v.gen == parseInt(gen)});
+		};
 	};
 
 	// Filtro especial
+	
 	if (especial != "all") {
-
-		tempDex = tempDex.filter(v => {return v.special == especial});
+		if (especial == "starter" && gen.includes("r-")) {
+			var region = gen.replace("r-","");
+			tempDex = tempDex.filter(v => {return v.special == especial && v[region] < 8 });
+		} else {
+			tempDex = tempDex.filter(v => {return v.special == especial});
+		};
 	};
 
 	// input
@@ -102,9 +133,46 @@ function cargarDex() {
 	};
 
 	// Ocultar variantes
-	if (especial != "megaevo" && especial != "regional") {
+	if (gen.includes("r-") && especial == "all") {
+		// se filtra por region
+
+		// No mostrar megaevoluciones
+		tempDex = tempDex.filter(v => {return v.special != "megaevo"});
+
+		// Solo mostrar variaciones regionales
+		var region = gen.replace("r-","");
+
+		tempDex = tempDex.filter(v => {
+			if ((v.name).toLowerCase().includes(region) && v.special == "regional") {
+				return (v.name).toLowerCase().includes(region) && v.special == "regional";
+			} else {
+				// Ocultar formas originales si existen regionales
+				try {
+					if (v.variant == 1 && !(v.regional).includes(region)) {
+						return (v.variant == 1);
+					} else {
+						if (v.name.includes(region)) {
+							// Kanto, Hoenn, Johto
+							return v.variant == 1;
+
+						} else {
+							// Centro, Montaña etc
+							var padre = $("#filter-gen option:selected").attr("data-parent");
+							return (v.name.includes(padre));
+
+						}
+					};
+				} catch (error) {
+					return (v.variant == 1);
+				};
+			};
+			 
+		});
+
+	} else if (especial != "megaevo" && especial != "regional" && especial != "gigamax" && !gen.includes("r-")) {
 		tempDex = tempDex.filter(v => {return v.variant == 1});
-	}
+
+	};
 	
 
 
@@ -112,21 +180,44 @@ function cargarDex() {
 	switch (orden) {
 		case "oldest":
 			tempDex.sort((a, b) => {
-				const nameA = a.id;
-				const nameB = b.id;
-				if (nameA < nameB) { return -1; }
-				if (nameA > nameB) { return 1; }
-				return 0; // iguales
+				if (gen.includes("r-")) {
+					// Ordenar por región
+					var region = gen.replace("r-","");
+					const nameA = a[region];
+					const nameB = b[region];
+					if (nameA < nameB) { return -1; }
+					if (nameA > nameB) { return 1; }
+					return 0; // iguales
+				} else {
+					// Ordenar por generacion
+					const nameA = a.id;
+					const nameB = b.id;
+					if (nameA < nameB) { return -1; }
+					if (nameA > nameB) { return 1; }
+					return 0; // iguales
+				};				
 			});
 			break;
 
 		case "newest":
 			tempDex.sort((a, b) => {
-				const nameA = a.id;
-				const nameB = b.id;
-				if (nameA < nameB) { return 1; }
-				if (nameA > nameB) { return -1; }
-				return 0; // iguales
+
+				if (gen.includes("r-")) {
+					// Ordenar por región
+					var region = gen.replace("r-","");
+					const nameA = a[region];
+					const nameB = b[region];
+					if (nameA < nameB) { return 1; }
+					if (nameA > nameB) { return -1; }
+					return 0; // iguales
+				} else {
+					// Ordenar por generacion
+					const nameA = a.id;
+					const nameB = b.id;
+					if (nameA < nameB) { return 1; }
+					if (nameA > nameB) { return -1; }
+					return 0; // iguales
+				};		
 			});
 			break;
 
@@ -157,9 +248,16 @@ function cargarDex() {
 
 function cargarVariant(id) {
 	// Cargar solo las variantes
-	var variant = dex.filter(v => {return v.id == id});
+	var variant = pokedex.filter(v => {return v.id == id});
 	$("#popup-card-container").html('');
 	$("#popup-navigation-container").html('');
+
+	// En pokedex regional, no mostrar variaciones de otras regiones
+	var region = $("#filter-gen").val();
+	if (region.includes("r-")) {
+		region = region.replace("r-", "");
+		variant = variant.filter(v => {return v[region] != null});
+	}
 
 	// Si hay más de uno dibujar botones
 	if (variant.length > 1) {
@@ -170,7 +268,7 @@ function cargarVariant(id) {
 		$(".pkmn-variant").eq(0).addClass("active");
 	};
 
-	preloadDex(variant, "#popup-card-container");
+	preloadDex(variant, "#popup-card-container", "full");
 
 	$("#popup-card-container .pkmn-card").eq(0).addClass("active");
 };
@@ -186,12 +284,41 @@ function changeMobileCard(n) {
 }
 
 
+function changeOptionDisplayName() {
+
+	// remove parent names
+	$("#filter-gen").find(".opt-child").each(function(){
+		var padre = $(this).attr("data-parent");
+		var nombre = $(this).text();
+		nombre = nombre.replace(padre, "");
+		$(this).text(nombre);
+	});
+	
+	// set new display name if necessary
+	try {
+		var clase = $("#filter-gen").find("option:selected").attr("class");	
+		if (clase.includes("opt-child")) {
+			var padre = $("#filter-gen").find("option:selected").attr("data-parent");	
+			var nombre = $("#filter-gen").find("option:selected").text();
+			$("#filter-gen").find("option:selected").text(padre + nombre);
+		}
+	} catch (error) {}
+
+}
+
 $(function() {
 	$("#button-up").click(function() {
 		window.scrollTo(0, 0);
 	});
 
 	$("select").change(function() {
+		// change display name on first filter if necessary
+		var filtro = $(this).attr("id");
+		if (filtro.includes("filter-gen")) {
+			changeOptionDisplayName();
+		}
+
+		// load pokedex
 		cargarDex();
 	});
 

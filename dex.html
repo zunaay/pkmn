@@ -16,7 +16,26 @@
 
 		<form onsubmit="return false;" >
 			<div id="hide-filters" class="mobile-option"><i class="fas fa-times-circle"></i></div>
-			<select id="filter-gen"></select>
+			<select id="filter-gen">
+				<option value="national">Pokédex Nacional</option><!--
+				<optgroup label="Regional" style="display:none;">
+					<option value="r-kanto">Kanto</option>
+					<option value="r-johto">Johto</option>
+					<option value="r-hoenn">Hoenn</option>
+					<option value="r-sinnoh">Sinnoh</option>
+					<option value="r-teselia">Teselia</option>
+					<option disabled>Kalos</option>
+						<option value="r-kalos" class="opt-child" data-parent="Kalos">&emsp;&gt;&emsp;Centro</option>
+						<option value="r-kalosc" class="opt-child" data-parent="Kalos">&emsp;&gt;&emsp;Costa</option>
+						<option value="r-kalosm" class="opt-child" data-parent="Kalos">&emsp;&gt;&emsp;Montaña</option>
+					<option value="r-alola">Alola</option>
+					<option value="r-galar">Galar</option>
+						<option value="r-garmor" class="opt-child" data-parent="Galar">&emsp;&gt;&emsp;I. Armadura</option>
+						<option value="r-gcrown" class="opt-child" data-parent="Galar">&emsp;&gt;&emsp;N. Corona</option>
+					<option value="r-hisui">Hisui</option>
+					<option value="r-paldea">Paldea</option>
+				</optgroup>-->
+			</select>
 			<select id="filter-type1">
 				<option value="all">Todos los tipos</option>
 				<option value="steel">Acero</option>
@@ -39,8 +58,8 @@
 				<option value="flying">Volador</option>
 			</select>
 			<select id="filter-order">
-				<option value="oldest">Más antiguos</option>
-				<option value="newest">Más recientes</option>
+				<option value="oldest">0-9</option>
+				<option value="newest">9-0</option>
 				<option value="az">A-Z</option>
 				<option value="za">Z-A</option>
 			</select>
@@ -48,9 +67,12 @@
 				<option value="all">No filtrar especiales</option>
 				<option value="starter">Iniciales</option>
 				<option value="legendary">Legendarios</option>
+				<option value="mythical">Singulares</option>
 				<option value="megaevo">Megaevoluciones</option>
 				<option value="regional">Regionales</option>
 				<option value="ultrabeast">Ultraentes</option>
+				<option value="gigamax">Gigamax</option>
+				<option value="paradox">Paradojas</option>
 			</select>
 			<input id="filter-name" value="" placeholder="Buscar...">
 		</form>		
